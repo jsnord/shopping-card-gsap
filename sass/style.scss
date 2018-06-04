@@ -26,7 +26,44 @@ body {
 }
 
 .card_slider {
+	position: relative;
+
+	max-width: 56em;
 	width: 100%;
+	height: 36em;
+
+	.slick-list,
+	.slick-track {
+		height: 100%;
+	}
+
+	.slick-track {
+		position: absolute !important;
+		width: 100% !important;
+		top: 0;
+		left: 0;
+		transform: none !important;
+	}
+
+}
+
+.card_slider_item {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0 !important;
+	left: 0 !important;
+
+	padding: 0;
+	float: none !important;
+
+	opacity: 0;
+
+	&.slick-active {
+		z-index: 2;
+		opacity: 1;
+	}
+
 }
 
 // card_block
@@ -35,8 +72,6 @@ body {
 
 	display: flex;
 	align-items: center;
-	max-width: 56em;
-	width: 100%;
 	min-height: 36em;
 	padding: 2em;
 	margin: 0 auto;
@@ -62,6 +97,8 @@ body {
 }
 
 .card_block_w_descr {
+	position: relative;
+	
 	max-width: 26.8em;
 	width: 100%;
 }
