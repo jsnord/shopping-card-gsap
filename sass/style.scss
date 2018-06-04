@@ -1,10 +1,174 @@
-@import "fonts.scss";
 @import "reset.scss";
+@import "fonts.scss";
+@import "variables.scss";
 
 html {
+	height: 100%;
 	font: 400 10px/1.33 'Montserrat';
 }
 
 body {
+	height: 100%;
 	font-size: 16px;
+	background-color: #262626;
+}
+
+//card_slider
+.card_w_slider {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	font-size: 1rem;
+}
+
+.card_slider {
+	width: 100%;
+}
+
+// card_block
+.card_block {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	max-width: 56em;
+	width: 100%;
+	min-height: 36em;
+	padding: 2em;
+	margin: 0 auto;
+
+	background: $white;
+	overflow: hidden;
+}
+
+.card_w_label {
+	margin-bottom: 2em;
+}
+
+.card_label {
+	display: inline-flex;
+	padding: (.5em/1) (1em/1);
+
+	font-size: 1em;
+	color: $white;
+	text-transform: uppercase;
+
+	background: rgb(100, 149, 237);
+	border-radius: (5em/1);
+}
+
+.card_block_w_descr {
+	max-width: 26.8em;
+	width: 100%;
+}
+
+.card_block_title {
+	font-size: 3.2em;
+	line-height: 1;
+	font-weight: 500;
+	color: $black_1;
+
+	&.offset_mod {
+		margin-bottom: (2em/3.2);
+	}
+
+}
+
+.card_block_descr {
+	font-size: 1.2em;
+	line-height: 1.4;
+	color: $gray;
+
+	&.offset_mod {
+		margin-bottom: (2em/1.2);
+	}
+
+}
+
+.card_block_w_button {
+	display: flex;
+	flex-direction: row;
+}
+
+$fnsbtn: 1.2;
+
+.btn_base {
+	position: relative;
+	z-index: 2;
+
+	display: block;
+	padding: (1em/$fnsbtn) (1.4em/$fnsbtn);
+
+	font-size: $fnsbtn + em;
+	color: $black_1;
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+
+	overflow: hidden;
+	border: 1px solid $gray;
+	transition: all 0.5s ease;
+
+	&:after {
+		position: absolute;
+		top: 0;
+		right: -10px;
+		z-index: -1;
+
+		width: 0%;
+		height: 100%;
+
+		background: $black_1;
+		transform: skew(-25deg);
+		transform-origin: right;
+		transition: width 0.3s ease-in-out;
+		content: "";
+	}
+
+	&:hover,
+	&:focus {
+		color: $white;
+	}
+
+	&:hover {
+		color: $white;
+
+		&:after {
+			width: 150%;
+			left: -10px;
+			transform-origin: left;
+		}
+
+	}
+
+	.card_block_w_button & {
+		&:nth-of-type(1) {
+			border-radius: (5em/$fnsbtn) 0 0 (5em/$fnsbtn);
+			border-right: none;
+		}
+		&:nth-of-type(2) {
+			border-radius: 0 (5em/$fnsbtn) (5em/$fnsbtn) 0;
+		}
+	}
+
+}
+
+.card_block_w_img {
+	position: absolute;
+	right: 0;
+
+	width: 27.2em;
+	bottom: -6em;
+	height: 42em;
+}
+
+.card_block_img {
+	display: block;
+	height: 100%;
+	width: 100%;
+
+	object-fit: cover;
 }
