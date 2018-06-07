@@ -1,11 +1,15 @@
-var $cardSlider = $('.cardSlider'),
+var $cardSlider,
+		$cardSliderDecor,
 		animObject = {},
 		slidesArray = [];
 
 $(document).ready(function ($) {
+	$cardSlider = $('.cardSlider');
+	$cardSliderDecor = $('.card_slider_decor');
 
 	animObject = {
-		'sliderChangeTime': .6,
+		'ease': Power4.easeOut,
+		'sliderChangeTime': .8,
 		'sliderTime': 5.3,
 		'sliderChangeDelay': .6
 	};
@@ -16,7 +20,7 @@ $(document).ready(function ($) {
 		var sub_object = {
 			'el': $this,
 			'elDescr': $('.card_block_w_descr', $this),
-			'elLabel': $('.card_label', $this),
+			'elLabel': $('.card_w_label', $this),
 			'elTitle': $('.card_block_title', $this),
 			'elText': $('.card_block_descr', $this),
 			'elImage': $('.card_block_w_img', $this),
@@ -44,13 +48,13 @@ function sliderInit() {
 				xPercent: [-100, 100]
 			},
 			opacity: 0,
-			ease: Power4.easeOut
+			ease: animObject.ease
 		}, {
 			cycle: {
 				xPercent: [0, 0]
 			},
 			opacity: 1,
-			ease: Power4.easeOut,
+			ease: animObject.ease,
 
 			onComplete: function () {
 			}
@@ -63,13 +67,83 @@ function sliderInit() {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		dots: false,
-		draggable: false,
+		// draggable: false,
 		speed: 0,
 		touchMove: false,
 		waitForAnimate: false,
 		accessibility: false,
-		arrows: false
+		arrows: false,
+		autoPlay: true
+	});
+
+	$cardSlider.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+
+		if (currentSlide !== nextSlide) {
+			slideAnim(nextSlide, currentSlide);
+		} else {
+			return false;
+		}
+
 	});
 
 }
 
+function slideAnim(nextSlide, currentSlide, $delay) {
+	var tl = new TimelineMax();
+	
+	if (!currentSlide) {
+		tl.set($cardSliderDecor, {className: '+=active_mod'})
+		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
+		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
+			xPercent: 100,
+			opacity: 0,
+			ease: animObject.ease
+		}, {
+			opacity: 1,
+			xPercent: 0,
+			ease: animObject.ease,
+		}, 0)
+		// moveDecor();
+		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
+			yPercent: 500,
+			opacity: 0,
+			ease: animObject.ease
+		}, {
+			opacity: 1,
+			yPercent: 0,
+			ease: animObject.ease,
+		}, .06)
+	} else {
+		tl.set($cardSliderDecor, {className: '+=active_mod'})
+		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
+		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
+			xPercent: 100,
+			opacity: 0,
+			ease: animObject.ease
+		}, {
+			opacity: 1,
+			xPercent: 0,
+			ease: animObject.ease,
+		}, 0)
+		
+		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
+			yPercent: 500,
+			opacity: 0,
+			ease: animObject.ease
+		}, {
+			opacity: 1,
+			yPercent: 0,
+			ease: animObject.ease,
+		}, .06)
+		
+	}
+
+}
+
+function moveDecor() {
+	$('.card_slider_decor').addClass('active_mod');
+
+	setTimeout(function(e) {
+		$('.card_slider_decor').removeClass('active_mod');
+	}, 2000);
+}

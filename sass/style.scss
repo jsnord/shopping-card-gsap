@@ -15,7 +15,7 @@ body {
 }
 
 //card_slider
-.card_w_slider {
+.wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -25,11 +25,16 @@ body {
 	font-size: 1rem;
 }
 
+.card_w_slider {
+	position: relative;
+	
+	overflow: hidden;
+}
+
 .card_slider {
 	position: relative;
 
-	max-width: 56em;
-	width: 100%;
+	width: 56em;
 	height: 36em;
 
 	.slick-list,
@@ -58,10 +63,32 @@ body {
 	float: none !important;
 
 	opacity: 0;
+	will-change: transform;
+	transform: translateZ(0);
 
 	&.slick-active {
 		z-index: 2;
 		opacity: 1;
+	}
+
+}
+
+.card_slider_decor {
+	position: absolute;
+	top: 0;
+	left: -20%;
+	z-index: 10;
+
+	height: 100%;
+	width: 0;
+
+	transform: skew(-25deg);
+	transform-origin: right;
+	transition: width 0.3s ease-in-out;
+	background-color: $black_1;
+
+	&.active_mod {
+		width: 150%;
 	}
 
 }
@@ -81,6 +108,8 @@ body {
 }
 
 .card_w_label {
+	position: relative;
+
 	margin-bottom: 2em;
 }
 
@@ -98,12 +127,14 @@ body {
 
 .card_block_w_descr {
 	position: relative;
-	
+
 	max-width: 26.8em;
 	width: 100%;
 }
 
 .card_block_title {
+	position: relative;
+
 	font-size: 3.2em;
 	line-height: 1;
 	font-weight: 500;
@@ -116,6 +147,8 @@ body {
 }
 
 .card_block_descr {
+	position: relative;
+
 	font-size: 1.2em;
 	line-height: 1.4;
 	color: $gray;
@@ -127,6 +160,8 @@ body {
 }
 
 .card_block_w_button {
+	position: relative;
+
 	display: flex;
 	flex-direction: row;
 }

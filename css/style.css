@@ -214,7 +214,7 @@ body {
   font-size: 16px;
   background-color: #262626; }
 
-.card_w_slider {
+.wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,10 +222,13 @@ body {
   height: 100%;
   font-size: 1rem; }
 
+.card_w_slider {
+  position: relative;
+  overflow: hidden; }
+
 .card_slider {
   position: relative;
-  max-width: 56em;
-  width: 100%;
+  width: 56em;
   height: 36em; }
   .card_slider .slick-list,
   .card_slider .slick-track {
@@ -245,10 +248,26 @@ body {
   left: 0 !important;
   padding: 0;
   float: none !important;
-  opacity: 0; }
+  opacity: 0;
+  will-change: transform;
+  transform: translateZ(0); }
   .card_slider_item.slick-active {
     z-index: 2;
     opacity: 1; }
+
+.card_slider_decor {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  z-index: 10;
+  height: 100%;
+  width: 0;
+  transform: skew(-25deg);
+  transform-origin: right;
+  transition: width 0.3s ease-in-out;
+  background-color: #111; }
+  .card_slider_decor.active_mod {
+    width: 150%; }
 
 .card_block {
   position: relative;
@@ -261,6 +280,7 @@ body {
   overflow: hidden; }
 
 .card_w_label {
+  position: relative;
   margin-bottom: 2em; }
 
 .card_label {
@@ -278,6 +298,7 @@ body {
   width: 100%; }
 
 .card_block_title {
+  position: relative;
   font-size: 3.2em;
   line-height: 1;
   font-weight: 500;
@@ -286,6 +307,7 @@ body {
     margin-bottom: 0.625em; }
 
 .card_block_descr {
+  position: relative;
   font-size: 1.2em;
   line-height: 1.4;
   color: #aaa; }
@@ -293,6 +315,7 @@ body {
     margin-bottom: 1.66667em; }
 
 .card_block_w_button {
+  position: relative;
   display: flex;
   flex-direction: row; }
 
