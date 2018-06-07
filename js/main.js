@@ -10,8 +10,7 @@ $(document).ready(function ($) {
 	animObject = {
 		'ease': Power4.easeOut,
 		'sliderChangeTime': .8,
-		'sliderTime': 5.3,
-		'sliderChangeDelay': .6
+		'delayOverlay': 1.2
 	};
 
 	$('.card_slider_item', $cardSlider).each(function () {
@@ -104,16 +103,15 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		}, {
 			opacity: 0,
 			yPercent: -500,
-			ease: animObject.ease,
+			ease: animObject.ease
 		}, .06)
 		tl.set($cardSliderDecor, {className: '+=active_mod'})
-		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
+		tl.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
 		tl.set(slidesArray[currentSlide].el, {opacity: 0})
 		tl.set(slidesArray[nextSlide].el, {opacity: 1})
 		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
 			opacity: 0,
-			ease: animObject.ease
 		}, {
 			opacity: 1,
 			xPercent: 0,
@@ -122,7 +120,6 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
 			yPercent: 500,
 			opacity: 0,
-			ease: animObject.ease
 		}, {
 			opacity: 1,
 			yPercent: 0,
@@ -143,25 +140,23 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		}, {
 			opacity: 0,
 			yPercent: -500,
-			ease: animObject.ease,
+			ease: animObject.ease
 		}, .06)
 		tl.set($cardSliderDecor, {className: '+=active_mod'})
-		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
+		tl.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
 		tl.set(slidesArray[currentSlide].el, {opacity: 0})
 		tl.set(slidesArray[nextSlide].el, {opacity: 1})
 		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
 			opacity: 0,
-			ease: animObject.ease
 		}, {
 			opacity: 1,
 			xPercent: 0,
-			ease: animObject.ease,
+			ease: animObject.ease
 		}, 0)
 		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
 			yPercent: 500,
-			opacity: 0,
-			ease: animObject.ease
+			opacity: 0
 		}, {
 			opacity: 1,
 			yPercent: 0,
