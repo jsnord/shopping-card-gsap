@@ -43,6 +43,7 @@ function loadFunc() {
 function sliderInit() {
 	$cardSlider.on('init', function (event, slick, currentSlide) {
 
+		TweenMax.set(slidesArray[0].el, {opacity: 1})
 		TweenMax.staggerFromTo([slidesArray[0].elDescr, slidesArray[0].elImage], .8, {
 			cycle: {
 				xPercent: [-100, 100]
@@ -92,30 +93,23 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 	var tl = new TimelineMax();
 	
 	if (!currentSlide) {
-		tl.set($cardSliderDecor, {className: '+=active_mod'})
-		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
-		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
+		tl.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
 			opacity: 0,
 			ease: animObject.ease
-		}, {
-			opacity: 1,
-			xPercent: 0,
-			ease: animObject.ease,
-		}, 0)
-		// moveDecor();
-		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
-			yPercent: 500,
-			opacity: 0,
-			ease: animObject.ease
-		}, {
-			opacity: 1,
+		})
+		tl.staggerFromTo([slidesArray[currentSlide].elLabel, slidesArray[currentSlide].elTitle, slidesArray[currentSlide].elText, slidesArray[currentSlide].elButtons], animObject.sliderChangeTime, {
 			yPercent: 0,
+			opacity: 1,
+		}, {
+			opacity: 0,
+			yPercent: -500,
 			ease: animObject.ease,
 		}, .06)
-	} else {
 		tl.set($cardSliderDecor, {className: '+=active_mod'})
 		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
+		tl.set(slidesArray[currentSlide].el, {opacity: 0})
+		tl.set(slidesArray[nextSlide].el, {opacity: 1})
 		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
 			opacity: 0,
@@ -125,7 +119,6 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 			xPercent: 0,
 			ease: animObject.ease,
 		}, 0)
-		
 		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
 			yPercent: 500,
 			opacity: 0,
@@ -134,6 +127,48 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 			opacity: 1,
 			yPercent: 0,
 			ease: animObject.ease,
+			onComplete: function(e) {
+				TweenMax.set([slidesArray[nextSlide].elImage, slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], {clearProps: 'all'});
+			}
+		}, .06)
+	} else {
+		tl.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
+			xPercent: 100,
+			opacity: 0,
+			ease: animObject.ease
+		})
+		tl.staggerFromTo([slidesArray[currentSlide].elLabel, slidesArray[currentSlide].elTitle, slidesArray[currentSlide].elText, slidesArray[currentSlide].elButtons], animObject.sliderChangeTime, {
+			yPercent: 0,
+			opacity: 1,
+		}, {
+			opacity: 0,
+			yPercent: -500,
+			ease: animObject.ease,
+		}, .06)
+		tl.set($cardSliderDecor, {className: '+=active_mod'})
+		tl.set($cardSliderDecor, {className: '-=active_mod', delay: 1})
+		tl.set(slidesArray[currentSlide].el, {opacity: 0})
+		tl.set(slidesArray[nextSlide].el, {opacity: 1})
+		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
+			xPercent: 100,
+			opacity: 0,
+			ease: animObject.ease
+		}, {
+			opacity: 1,
+			xPercent: 0,
+			ease: animObject.ease,
+		}, 0)
+		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
+			yPercent: 500,
+			opacity: 0,
+			ease: animObject.ease
+		}, {
+			opacity: 1,
+			yPercent: 0,
+			ease: animObject.ease,
+			onComplete: function(e) {
+				TweenMax.set([slidesArray[nextSlide].elImage, slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], {clearProps: 'all'});
+			}
 		}, .06)
 		
 	}
