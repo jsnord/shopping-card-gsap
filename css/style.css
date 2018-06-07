@@ -251,6 +251,8 @@ body {
   opacity: 0;
   will-change: transform;
   transform: translateZ(0); }
+  .card_slider_item.slick-active {
+    z-index: 2; }
 
 .card_slider_decor {
   position: absolute;

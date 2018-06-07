@@ -65,6 +65,11 @@ body {
 	opacity: 0;
 	will-change: transform;
 	transform: translateZ(0);
+
+	&.slick-active {
+		z-index: 2;
+	}
+	
 }
 
 .card_slider_decor {
