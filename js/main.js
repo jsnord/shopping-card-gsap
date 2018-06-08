@@ -1,6 +1,7 @@
 var $cardSlider,
 		$cardSliderDecor,
 		animObject = {},
+		checkAnim = false,
 		slidesArray = [];
 
 $(document).ready(function ($) {
@@ -47,18 +48,13 @@ function sliderInit() {
 			cycle: {
 				xPercent: [-100, 100]
 			},
-			opacity: 0,
-			ease: animObject.ease
+			opacity: 0
 		}, {
 			cycle: {
 				xPercent: [0, 0]
 			},
 			opacity: 1,
-			ease: animObject.ease,
-
-			onComplete: function () {
-			}
-
+			ease: animObject.ease
 		}, 0)
 	});
 
@@ -71,9 +67,20 @@ function sliderInit() {
 		speed: 0,
 		touchMove: false,
 		waitForAnimate: false,
-		accessibility: false,
-		arrows: false,
-		autoPlay: true
+		accessibility: false
+		// arrows: false,
+	});
+
+	$('.slider_control.prev_mod').click(function () {
+		if(!checkAnim) {
+			$cardSlider.slick("slickPrev");
+		}
+	});
+
+	$('.slider_control.next_mod').click(function () {
+		if(!checkAnim) {
+			$cardSlider.slick("slickNext");
+		}
 	});
 
 	$cardSlider.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
@@ -91,7 +98,8 @@ function sliderInit() {
 function slideAnim(nextSlide, currentSlide, $delay) {
 	var tl = new TimelineMax();
 	
-	if (!currentSlide) {
+	if (!currentSlide && !checkAnim) {
+		checkAnim = true;
 		tl.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
 			opacity: 0,
@@ -111,7 +119,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		tl.set(slidesArray[nextSlide].el, {opacity: 1})
 		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
-			opacity: 0,
+			opacity: 0
 		}, {
 			opacity: 1,
 			xPercent: 0,
@@ -119,16 +127,18 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		}, 0)
 		tl.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
 			yPercent: 500,
-			opacity: 0,
+			opacity: 0
 		}, {
 			opacity: 1,
 			yPercent: 0,
 			ease: animObject.ease,
 			onComplete: function(e) {
 				TweenMax.set([slidesArray[nextSlide].elImage, slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], {clearProps: 'all'});
+				checkAnim = false;
 			}
 		}, .06)
-	} else {
+	} else if (!checkAnim) {
+		checkAnim = true;
 		tl.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
 			opacity: 0,
@@ -136,7 +146,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		})
 		tl.staggerFromTo([slidesArray[currentSlide].elLabel, slidesArray[currentSlide].elTitle, slidesArray[currentSlide].elText, slidesArray[currentSlide].elButtons], animObject.sliderChangeTime, {
 			yPercent: 0,
-			opacity: 1,
+			opacity: 1
 		}, {
 			opacity: 0,
 			yPercent: -500,
@@ -148,7 +158,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		tl.set(slidesArray[nextSlide].el, {opacity: 1})
 		tl.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
 			xPercent: 100,
-			opacity: 0,
+			opacity: 0
 		}, {
 			opacity: 1,
 			xPercent: 0,
@@ -163,6 +173,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 			ease: animObject.ease,
 			onComplete: function(e) {
 				TweenMax.set([slidesArray[nextSlide].elImage, slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], {clearProps: 'all'});
+				checkAnim = false;
 			}
 		}, .06)
 		

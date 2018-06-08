@@ -222,7 +222,7 @@ body {
   height: 100%;
   font-size: 1rem; }
 
-.card_w_slider {
+.card_inner_slider {
   position: relative;
   overflow: hidden; }
 
@@ -369,3 +369,27 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover; }
+
+.slider_w_control {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #000; }
+
+.slider_control {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 4em;
+  height: 4em;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color .3s ease; }
+  .slider_control:hover {
+    background-color: #000; }
+
+.slider_control_in {
+  width: 1em;
+  height: 1em;
+  fill: #000; }
+  .slider_control:hover .slider_control_in {
+    fill: #fff; }
