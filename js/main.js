@@ -11,7 +11,7 @@ $(document).ready(function ($) {
 	animObject = {
 		'ease': Power4.easeOut,
 		'sliderChangeTime': .8,
-		'delayOverlay': 1.2
+		'delayOverlay': .8
 	};
 
 });
@@ -113,7 +113,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 			yPercent: -500,
 			ease: animObject.ease
 		}, .06)
-		tl.set($cardSliderDecor, {className: '+=active_mod'})
+		tl.set($cardSliderDecor, {className: '+=active_mod'}, '-=.4')
 		tl.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
 		tl.set(slidesArray[currentSlide].el, {opacity: 0})
 		tl.set(slidesArray[nextSlide].el, {opacity: 1})
@@ -152,7 +152,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 			yPercent: -500,
 			ease: animObject.ease
 		}, .06)
-		tl.set($cardSliderDecor, {className: '+=active_mod'})
+		tl.set($cardSliderDecor, {className: '+=active_mod'}, '-=.4')
 		tl.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
 		tl.set(slidesArray[currentSlide].el, {opacity: 0})
 		tl.set(slidesArray[nextSlide].el, {opacity: 1})
