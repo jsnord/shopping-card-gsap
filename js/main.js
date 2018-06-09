@@ -14,6 +14,13 @@ $(document).ready(function ($) {
 		'delayOverlay': 1.2
 	};
 
+});
+
+$(window).on('load', function () {
+	loadFunc();
+});
+
+function loadFunc() {
 	$('.card_slider_item', $cardSlider).each(function () {
 		var $this = $(this);
 
@@ -29,14 +36,7 @@ $(document).ready(function ($) {
 
 		slidesArray.push(sub_object);
 	});
-
-});
-
-$(window).on('load', function () {
-	loadFunc();
-});
-
-function loadFunc() {
+	
 	sliderInit();
 }
 

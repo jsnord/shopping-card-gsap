@@ -52,6 +52,10 @@ body {
 
 }
 
+.slick-prev {
+	display: none !important;
+}
+
 .card_slider_item {
 	position: absolute;
 	width: 100%;

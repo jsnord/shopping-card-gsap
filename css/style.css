@@ -240,6 +240,9 @@ body {
     left: 0;
     transform: none !important; }
 
+.slick-prev {
+  display: none !important; }
+
 .card_slider_item {
   position: absolute;
   width: 100%;
