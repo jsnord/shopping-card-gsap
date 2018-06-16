@@ -97,8 +97,8 @@ function sliderInit() {
 
 function slideAnim(nextSlide, currentSlide, $delay) {
 	var tl = new TimelineMax();
-	
-	if (!currentSlide && !checkAnim) {
+
+	if (currentSlide < nextSlide && !checkAnim) {
 		checkAnim = true;
 		tl
 			.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
@@ -113,7 +113,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 				opacity: 0,
 				yPercent: -500,
 				ease: animObject.ease
-			}, .06)
+			}, .06, '-=.4')
 			.set($cardSliderDecor, {className: '+=active_mod'}, '-=.4')
 			.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
 			.set(slidesArray[currentSlide].el, {opacity: 0})
@@ -153,7 +153,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 				opacity: 0,
 				yPercent: -500,
 				ease: animObject.ease
-			}, .06)
+			}, .06, '-=.4')
 			.set($cardSliderDecor, {className: '+=active_mod'}, '-=.4')
 			.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
 			.set(slidesArray[currentSlide].el, {opacity: 0})
