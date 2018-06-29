@@ -59,16 +59,14 @@ function sliderInit() {
 	});
 
 	$cardSlider.slick({
-		infinite: false,
+		infinite: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		dots: false,
-		// draggable: false,
 		speed: 0,
 		touchMove: false,
 		waitForAnimate: false,
 		accessibility: false
-		// arrows: false,
 	});
 
 	$('.slider_control.prev_mod').click(function () {
@@ -96,56 +94,18 @@ function sliderInit() {
 }
 
 function slideAnim(nextSlide, currentSlide, $delay) {
-	var tl = new TimelineMax();
-
+	
 	if (currentSlide < nextSlide && !checkAnim) {
 		checkAnim = true;
-		tl
-			.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
-				xPercent: 100,
-				opacity: 0,
-				ease: animObject.ease
-			})
-			.staggerFromTo([slidesArray[currentSlide].elLabel, slidesArray[currentSlide].elTitle, slidesArray[currentSlide].elText, slidesArray[currentSlide].elButtons], animObject.sliderChangeTime, {
-				yPercent: 0,
-				opacity: 1,
-			}, {
-				opacity: 0,
-				yPercent: -500,
-				ease: animObject.ease
-			}, .06, '-=.4')
-			.to($cardSliderDecor, .6, {
-				xPercent: 100,
-				ease: Power2.easeInOut
-			}, '-=.4')
-			.to($cardSliderDecor, .6, {
-				xPercent: 0,
-				ease: Power2.easeInOut
-			}, '+=.8')
-			.set(slidesArray[currentSlide].el, {opacity: 0})
-			.set(slidesArray[nextSlide].el, {opacity: 1})
-			.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
-				xPercent: 100,
-				opacity: 0
-			}, {
-				opacity: 1,
-				xPercent: 0,
-				ease: animObject.ease,
-			}, 0)
-			.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
-				yPercent: 500,
-				opacity: 0
-			}, {
-				opacity: 1,
-				yPercent: 0,
-				ease: animObject.ease,
-				onComplete: function(e) {
-					TweenMax.set([slidesArray[nextSlide].elImage, slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], {clearProps: 'all'});
-					checkAnim = false;
-				}
-			}, .06)
+		animSlides();
 	} else if (!checkAnim) {
 		checkAnim = true;
+		animSlides();
+	}
+
+	function animSlides() {
+		var tl = new TimelineMax();
+
 		tl
 			.to(slidesArray[currentSlide].elImage, animObject.sliderChangeTime, {
 				xPercent: 100,
@@ -154,24 +114,30 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 			})
 			.staggerFromTo([slidesArray[currentSlide].elLabel, slidesArray[currentSlide].elTitle, slidesArray[currentSlide].elText, slidesArray[currentSlide].elButtons], animObject.sliderChangeTime, {
 				yPercent: 0,
-				opacity: 1
+				opacity: 1,
 			}, {
 				opacity: 0,
 				yPercent: -500,
 				ease: animObject.ease
 			}, .06, '-=.4')
-			.set($cardSliderDecor, {className: '+=active_mod'}, '-=.4')
-			.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
+			.to($cardSliderDecor, .6, {
+				xPercent: 100,
+				ease: Power2.easeInOut
+			}, '-=.6')
+			.to($cardSliderDecor, .6, {
+				xPercent: 0,
+				ease: Power2.easeInOut
+			}, '+=.5')
 			.set(slidesArray[currentSlide].el, {opacity: 0})
 			.set(slidesArray[nextSlide].el, {opacity: 1})
-			.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
+			.fromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
 				xPercent: 100,
 				opacity: 0
 			}, {
 				opacity: 1,
 				xPercent: 0,
 				ease: animObject.ease
-			}, 0)
+			})
 			.staggerFromTo([slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], animObject.sliderChangeTime, {
 				yPercent: 500,
 				opacity: 0
@@ -183,8 +149,7 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 					TweenMax.set([slidesArray[nextSlide].elImage, slidesArray[nextSlide].elLabel, slidesArray[nextSlide].elTitle, slidesArray[nextSlide].elText, slidesArray[nextSlide].elButtons], {clearProps: 'all'});
 					checkAnim = false;
 				}
-			}, .06)
-		
+			}, .06, '-=.4')
 	}
 
 }
