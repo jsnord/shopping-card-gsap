@@ -266,10 +266,7 @@ body {
   width: 150%;
   transform: translateX(-100%) skew(-25deg);
   transform-origin: right;
-  transition: transform .4s ease-in-out;
   background-color: #111; }
-  .card_slider_decor.active_mod {
-    transform: translateX(0) skew(-25deg); }
 
 .card_block {
   position: relative;

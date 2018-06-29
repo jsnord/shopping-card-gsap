@@ -87,13 +87,7 @@ body {
 
 	transform: translateX(-100%) skew(-25deg);
 	transform-origin: right;
-	transition: transform .4s ease-in-out;
 	background-color: $black_1;
-
-	&.active_mod {
-		transform: translateX(0) skew(-25deg);
-	}
-
 }
 
 // card_block

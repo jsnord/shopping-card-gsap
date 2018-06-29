@@ -114,8 +114,14 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 				yPercent: -500,
 				ease: animObject.ease
 			}, .06, '-=.4')
-			.set($cardSliderDecor, {className: '+=active_mod'}, '-=.4')
-			.set($cardSliderDecor, {className: '-=active_mod', delay: animObject.delayOverlay})
+			.to($cardSliderDecor, .6, {
+				xPercent: 100,
+				ease: Power2.easeInOut
+			}, '-=.4')
+			.to($cardSliderDecor, .6, {
+				xPercent: 0,
+				ease: Power2.easeInOut
+			}, '+=.8')
 			.set(slidesArray[currentSlide].el, {opacity: 0})
 			.set(slidesArray[nextSlide].el, {opacity: 1})
 			.staggerFromTo(slidesArray[nextSlide].elImage, animObject.sliderChangeTime, {
@@ -181,12 +187,4 @@ function slideAnim(nextSlide, currentSlide, $delay) {
 		
 	}
 
-}
-
-function moveDecor() {
-	$('.card_slider_decor').addClass('active_mod');
-
-	setTimeout(function(e) {
-		$('.card_slider_decor').removeClass('active_mod');
-	}, 2000);
 }
